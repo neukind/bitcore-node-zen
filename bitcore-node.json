@@ -1,0 +1,5 @@
+"servicesConfig": {
+    "web": {
+      "jsonRequestLimit": "50mb"
+    }
+  }

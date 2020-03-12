@@ -1,5 +1,9 @@
 "servicesConfig": {
     "web": {
       "jsonRequestLimit": "50mb"
+    },
+    "bitcoind":{
+       "maxTransactionHistory": 1000
     }
   }
+  

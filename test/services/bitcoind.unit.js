@@ -36,7 +36,8 @@ describe('Bitcoin Service', function() {
     spawn: {
       datadir: 'testdir',
       exec: 'testpath'
-    }
+    },
+    "maxTransactionHistory": 1000
   };
 
   describe('@constructor', function() {
@@ -3383,7 +3384,7 @@ describe('Bitcoin Service', function() {
     var address = '12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX';
     it('will give error with "from" and "to" range that exceeds max size', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
-      bitcoind.getAddressHistory(address, {from: 0, to: 51}, function(err) {
+      bitcoind.getAddressHistory(address, {from: 0, to: 1001}, function(err) {
         should.exist(err);
         err.message.match(/^\"from/);
         done();
@@ -3392,7 +3393,7 @@ describe('Bitcoin Service', function() {
     it('will give error with "from" and "to" order is reversed', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
       bitcoind.getAddressTxids = sinon.stub().callsArgWith(2, null, []);
-      bitcoind.getAddressHistory(address, {from: 51, to: 0}, function(err) {
+      bitcoind.getAddressHistory(address, {from: 1001, to: 0}, function(err) {
         should.exist(err);
         err.message.match(/^\"from/);
         done();
